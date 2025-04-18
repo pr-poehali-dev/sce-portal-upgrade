@@ -49,11 +49,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "sce-primary": "#1a478a",
-        "sce-secondary": "#2c3e50",
-        "sce-accent": "#3498db",
-        "sce-light": "#ecf0f1",
-        "sce-dark": "#1e293b",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -73,13 +68,6 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            maxWidth: '100%',
-          },
-        },
       },
     },
   },

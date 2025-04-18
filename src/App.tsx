@@ -1,65 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/hooks/useAuth";
-import { Toaster } from "@/components/ui/toaster";
-import HomePage from "@/pages/HomePage";
-import LoginPage from "@/pages/LoginPage";
-import ObjectsPage from "@/pages/ObjectsPage";
-import ObjectDetail from "@/pages/ObjectDetail";
-import PersonnelPage from "@/pages/PersonnelPage";
-import OperationsPage from "@/pages/OperationsPage";
-import AnomaliesPage from "@/pages/AnomaliesPage";
-import NotFound from "@/pages/NotFound";
-import AccessDenied from "@/pages/AccessDenied";
-import SecureRoute from "@/components/SecureRoute";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Публичные маршруты */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/access-denied" element={<AccessDenied />} />
-          
-          {/* Защищенные маршруты */}
-          <Route path="/objects" element={
-            <SecureRoute requiredClearance={2}>
-              <ObjectsPage />
-            </SecureRoute>
-          } />
-          
-          <Route path="/objects/:id" element={
-            <SecureRoute requiredClearance={3}>
-              <ObjectDetail />
-            </SecureRoute>
-          } />
-          
-          <Route path="/personnel" element={
-            <SecureRoute requiredClearance={2}>
-              <PersonnelPage />
-            </SecureRoute>
-          } />
-          
-          <Route path="/operations" element={
-            <SecureRoute requiredClearance={3}>
-              <OperationsPage />
-            </SecureRoute>
-          } />
-          
-          <Route path="/anomalies" element={
-            <SecureRoute requiredClearance={2}>
-              <AnomaliesPage />
-            </SecureRoute>
-          } />
-          
-          {/* Маршрут для отсутствующих страниц */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Toaster />
-      </Router>
-    </AuthProvider>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+      <div className="container flex flex-col items-center justify-center gap-4 px-4 py-16">
+        <h1 className="text-4xl font-bold">Ваше приложение</h1>
+        <p className="text-center text-xl">
+          Начните разработку с этой базовой структуры
+        </p>
+        <div className="flex items-center gap-4">
+          <button
+            className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+            onClick={() => setCount((count) => count + 1)}
+          >
+            Счётчик: {count}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
