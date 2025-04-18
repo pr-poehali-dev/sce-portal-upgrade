@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { UserIcon, Menu, X, Lock, LogOut } from "lucide-react";
+import { UserIcon, Menu, X, Lock, LogOut, Search } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { Input } from "./ui/input";
 
 const SCENavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,11 +29,19 @@ const SCENavbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/documents" className="hover:text-sce-accent transition-colors">
-              Документы
+            <div className="relative mr-4">
+              <Input 
+                placeholder="Поиск по базе данных..." 
+                className="pl-8 pr-4 py-2 bg-white/10 border-white/20 text-white placeholder:text-white/60 w-64"
+              />
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/60" />
+            </div>
+            
+            <Link to="/objects" className="hover:text-sce-accent transition-colors">
+              Объекты SCE
             </Link>
             <Link to="/personnel" className="hover:text-sce-accent transition-colors">
-              Сотрудники
+              Персонал
             </Link>
             <Link to="/operations" className="hover:text-sce-accent transition-colors">
               Операции
@@ -74,19 +83,27 @@ const SCENavbar = () => {
         {isOpen && (
           <div className="md:hidden pt-4 pb-3 border-t border-gray-700">
             <div className="space-y-3">
+              <div className="relative mb-4">
+                <Input 
+                  placeholder="Поиск по базе данных..." 
+                  className="pl-8 pr-4 py-2 bg-white/10 border-white/20 text-white placeholder:text-white/60 w-full"
+                />
+                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/60" />
+              </div>
+              
               <Link
-                to="/documents"
+                to="/objects"
                 className="block hover:text-sce-accent transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Документы
+                Объекты SCE
               </Link>
               <Link
                 to="/personnel"
                 className="block hover:text-sce-accent transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Сотрудники
+                Персонал
               </Link>
               <Link
                 to="/operations"

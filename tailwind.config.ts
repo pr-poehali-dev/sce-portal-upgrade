@@ -1,14 +1,11 @@
-import type { Config } from "tailwindcss";
+import { type Config } from "tailwindcss";
 
-const config = {
+export default {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -19,13 +16,6 @@ const config = {
     },
     extend: {
       colors: {
-        sce: {
-          primary: "#1a1a1a",
-          secondary: "#5c1313",
-          accent: "#c41616",
-          light: "#e6e6e6",
-          dark: "#0a0a0a",
-        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -59,6 +49,11 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "sce-primary": "#1a478a",
+        "sce-secondary": "#2c3e50",
+        "sce-accent": "#3498db",
+        "sce-light": "#ecf0f1",
+        "sce-dark": "#1e293b",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -79,9 +74,17 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%',
+          },
+        },
+      },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;
-
-export default config;
