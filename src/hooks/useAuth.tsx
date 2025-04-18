@@ -13,6 +13,7 @@ interface AuthContextType {
   logout: () => void;
   isLoading: boolean;
   error: string | null;
+  hasAccess: (requiredLevel: number) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,7 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const userData: User = {
         id: "sce-staff-" + Math.random().toString(36).substr(2, 9),
         name: username || "Оперативник",
-        role: "Исследователь",
+        role: "Старший Исследователь",
         clearanceLevel: 5
       };
 
@@ -62,8 +63,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("sce_user");
   };
 
+  // Функция для проверки уровня доступа
+  const hasAccess = (requiredLevel: number): boolean => {
+    if (!user) return false;
+    // Пользователь с уровнем 5 имеет доступ ко всему
+    return user.clearanceLevel >= requiredLevel;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading, error }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading, error, hasAccess }}>
       {children}
     </AuthContext.Provider>
   );

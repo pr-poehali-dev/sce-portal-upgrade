@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { UserIcon, Database, Menu, X, Lock, LogOut } from "lucide-react";
+import { UserIcon, Menu, X, Lock, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const SCENavbar = () => {
@@ -14,7 +14,11 @@ const SCENavbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <Link to="/" className="flex items-center">
-              <img src="/logo-b.svg" alt="SCE Logo" className="h-10 w-auto" />
+              <img 
+                src="https://cdn.poehali.dev/files/9f300eaa-ffd3-4251-9d2b-fb388fe4f6a1.png" 
+                alt="SCE Logo" 
+                className="h-12 w-auto" 
+              />
               <div className="ml-2">
                 <span className="font-bold text-xl block">SCE Foundation</span>
                 <span className="text-xs opacity-75">Secure. Control. Explore</span>

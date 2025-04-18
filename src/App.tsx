@@ -1,37 +1,59 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import DocumentsPage from "./pages/DocumentsPage";
-import DocumentDetail from "./pages/DocumentDetail";
-import MTFPage from "./pages/MTFPage";
-import NotFound from "./pages/NotFound";
+import HomePage from "@/pages/HomePage";
+import LoginPage from "@/pages/LoginPage";
+import DocumentsPage from "@/pages/DocumentsPage";
+import DocumentDetail from "@/pages/DocumentDetail";
+import NotFound from "@/pages/NotFound";
+import AccessDenied from "@/pages/AccessDenied";
+import SecureRoute from "@/components/SecureRoute";
+import "./App.css";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+function App() {
+  return (
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/documents" element={<DocumentsPage />} />
-            <Route path="/document/:id" element={<DocumentDetail />} />
-            <Route path="/mtf" element={<MTFPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/access-denied" element={<AccessDenied />} />
+          
+          {/* Защищенные маршруты */}
+          <Route path="/documents" element={
+            <SecureRoute requiredClearance={3}>
+              <DocumentsPage />
+            </SecureRoute>
+          } />
+          
+          <Route path="/documents/:id" element={
+            <SecureRoute requiredClearance={4}>
+              <DocumentDetail />
+            </SecureRoute>
+          } />
+          
+          <Route path="/personnel" element={
+            <SecureRoute requiredClearance={3}>
+              <DocumentsPage />
+            </SecureRoute>
+          } />
+          
+          <Route path="/operations" element={
+            <SecureRoute requiredClearance={4}>
+              <DocumentsPage />
+            </SecureRoute>
+          } />
+          
+          <Route path="/anomalies" element={
+            <SecureRoute requiredClearance={3}>
+              <DocumentsPage />
+            </SecureRoute>
+          } />
+          
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
     </AuthProvider>
-  </QueryClientProvider>
-);
+  );
+}
 
 export default App;
