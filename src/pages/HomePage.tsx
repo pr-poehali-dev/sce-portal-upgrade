@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SCENavbar from "@/components/SCENavbar";
 import SCEFooter from "@/components/SCEFooter";
-import { Shield, FileText, Users, Flask, AlertTriangle } from "lucide-react";
+import { Shield, FileText, Users, Beaker, AlertTriangle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const HomePage = () => {
@@ -94,7 +94,7 @@ const HomePage = () => {
               <Card className="hover:shadow-md transition-shadow">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-sce-accent/10 flex items-center justify-center mb-4">
-                    <Flask className="h-6 w-6 text-sce-accent" />
+                    <Beaker className="h-6 w-6 text-sce-accent" />
                   </div>
                   <CardTitle>Аномалии</CardTitle>
                   <CardDescription>
